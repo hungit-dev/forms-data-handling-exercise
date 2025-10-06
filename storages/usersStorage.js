@@ -25,6 +25,10 @@ class UsersStorage {
   deleteUser(id) {
     delete this.storage[id];
   }
+  getUserByEmail(email) {
+    // Loop through all users and find the one with matching email
+    return Object.values(this.storage).find((user) => user.email === email);
+  }
 }
 // Rather than exporting the class, we can export an instance of the class by instantiating it.
 // This ensures only one instance of this class can exist, also known as the "singleton" pattern.

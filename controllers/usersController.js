@@ -46,6 +46,27 @@ const validateUser = [
     .withMessage("Bio must be lower than 200 characters"),
 ];
 
+exports.userSearchGet = (req, res) => {
+  res.render("searchUser", {
+    title: "Search User",
+  });
+};
+
+exports.userSearchResultGet = (req, res) => {
+  searchEmail = req.query.email;
+  searchUser = usersStorage.getUserByEmail(searchEmail);
+  console.log(searchUser);
+  if (!searchUser) {
+    res.render("users/user", {
+      user: {},
+    });
+    return;
+  }
+  res.render("users/user", {
+    user: searchUser,
+  });
+};
+
 // We can pass an entire array of middleware validations to our controller.
 exports.usersCreatePost = [
   validateUser,
